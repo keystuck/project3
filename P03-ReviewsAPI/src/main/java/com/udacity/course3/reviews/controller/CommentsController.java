@@ -21,8 +21,6 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    // TODO: Wire needed JPA repositories here
-
     @Autowired
     private ReviewRepository reviewRepository;
 
