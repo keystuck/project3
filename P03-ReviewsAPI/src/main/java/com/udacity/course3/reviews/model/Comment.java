@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "comments")
@@ -13,11 +14,18 @@ public class Comment {
     @Column(name = "comment_id")
     private int commentId;
 
+    @NotNull
     @Column(name = "commenter_name")
     private String commenterName;
 
+    @NotNull
     @Column(name = "comment_text")
     private String commentText;
+
+    @ManyToOne
+    @JoinColumn(name = "review_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Review review;
 
     public Review getReview() {
         return review;
@@ -27,10 +35,7 @@ public class Comment {
         this.review = review;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "review_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Review review;
+
 
     public int getCommentId() {
         return commentId;

@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -14,11 +15,18 @@ public class Review {
     @Column(name = "review_id")
     private int reviewId;
 
+    @NotNull
     @Column(name = "reviewer_name")
     private String reviewerName;
 
+    @NotNull
     @Column(name = "review_text")
     private String reviewText;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Product product;
 
     public Product getProduct() {
         return product;
@@ -29,29 +37,6 @@ public class Review {
     }
 
 
-
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Product product;
-
-    /*
-    @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST)
-    private List<Comment> comments;
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void addComment(Comment comment){
-        comments.add(comment);
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-*/
     public int getReviewId() {
         return reviewId;
     }

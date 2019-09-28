@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,7 @@ public class Product {
     private int productId;
 
     @Column(name = "product_name")
+    @NotNull
     private String productName;
 
     public int getProductId() {
